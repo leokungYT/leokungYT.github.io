@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Portfolio</title>
+</head>
+<body>
+    <div class="bar1">
+        <a href="#" >HOME</a>
+        <a href="#" id="scrollButton">ประวัติส่วนตัว</a>
+        <a href="#" id="newButton">ผลงานบางส่วน</a>
+        <a href="lab.html" id="lab">งาน lab</a>
+        <a href="api.html" id="api">api</a>
+        <a href="Chart.html">Chart</a>
+        <a href="googlesheet.html">googlesheet</a>
+        <a href="#" id="titod">ติดต่อ</a>
+    </div>
+    <div class="bar2" id="bar2">
+        <h1 class="animated-text" id="animated-text">จีรศักดิ์ พิมพ์คำไหล<br></h1>
+        <h2>ผลงานอยู่ข้างล่าง</h2>
+    </div>
+    <div class="PersonalHistory" id="PersonalHistory">
+        <h1>
+            ประวัติส่วนตัว
+        </h1>
+        <h2>
+            ประวัติส่วนตัวแบบย่อๆ
+        </h2>
+        <p>ชื่อจริง นายจีรศักดิ์ พิมพ์คำไหล</p>
+        <p>ชื่อเล่น ลีโอ</p>
+        <p>อายุ 19ปี</p>
+        <p>เกิดวันที่ 26 เดือน มกราคม ปี 2547</p>
+        <p>ระดับ ประถมศึกษา โรงเรียนบ้านแดงน้อย</p>
+        <p>ระดับ มัธยม      โรงเรียนบ้านแดงน้อย</p>
+        <p>ระดับ ประกาศนียบัตรวิชาชีพ วิทยาลัยเทคนิคขอนแก่น</p>
+        <p></p>
+    </div>
+
+    <div class="Achievements" id="Achievements">
+        <h1>รูปผลงานบางส่วน</h1>
+        <div class="image-container">
+            <img id="zoomed-image" src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+        </div>
+    </div>
+    <div class="change">
+        <h1>กดปุ่มเพื่อเปลี่ยนชื่อจริง</h1>
+        <button class="btn2" onclick="changeHeaderText()">Change จีรศักดิ์ พิมพ์คำไหล</button>
+    </div>
+    <button id="scrollUpButton" onclick="topFunction()">เลื่อน ขึ้น</button>
+    <footer>
+        <div class="footer-content" id="footer-content">
+        <div class="footer-logo">ช่องทางการติดต่อ</div>
+        </div>
+        <p>Email: leokung45@gmail.com</p>
+        <p>Phone: 083879218</p>
+        <p>&copy; 2023 จีรศักดิ์ พิมพ์คำไหล All rights reserved.</p>
+    </footer>
+        
+    <script src="option.js">
+    </script>
+
+</body>
+</html>

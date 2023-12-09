@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <meta http-equiv=”refresh” content="1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Chart</title>
+</head>
+<body>
+    <div class="bar1">
+        <a href="index.html" >HOME</a>
+        <a href="lab.html" id="lab">งาน lab</a>
+        <a href="api.html" id="api">api</a> 
+        <a href="Chart.html">Chart</a>
+        <a href="googlesheet.html">googlesheet</a>
+        <a href="#" id="titod">ติดต่อ</a>
+    </div>
+    <div class="chart">
+    <h1>chart ดึงข้อมูลในไฟล์ตัวเอง</h1>
+    <canvas id="myChart" style="width:100%;max-width:1800px"></canvas>
+</div>
+
+<div class="chart">
+    <h1>Chart ดึงข้อมูลจากภายนอก</h1>
+    <div id="coinRatesContainer">
+        <h2>Coin Rates</h2>
+        <div id="lastUpdateTime">
+            <label>Last Update Time:</label>
+        </div>
+        <canvas id="pricesChart" width="300" height="100"></canvas>
+    </div>
+</div>
+
+    <script>
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            // Count the number of countries per religion
+            const religionCounts = {};
+            data.forEach(entry => {
+                const religion = entry.religion;
+                religionCounts[religion] = (religionCounts[religion] || 0) + 1;
+            });
+    
+            // Extract data for the chart
+            const labels = Object.keys(religionCounts);
+            const counts = Object.values(religionCounts);
+    
+            // Create a bar chart using Chart.js
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Countries',
+                        data: counts,
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)',  /* Add more colors as needed */],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', /* Add more colors as needed */],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+ // Function to display cryptocurrency prices as a bar chart
+ function displayPricesChart(rates) {
+        const currencies = ['1INCH', 'AAVE', 'ABT', 'ACH', 'ACS', 'ADA', 'AED', 'BTC', 'ETH'];
+        const pricesData = currencies.map(currency => rates[currency] || 0);
+
+        const ctx = document.getElementById('pricesChart').getContext('2d');
+        const pricesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: currencies,
+                datasets: [{
+                    label: 'Cryptocurrency Prices (USD)',
+                    data: pricesData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // Function to handle fetch errors
+    function handleFetchError(error) {
+        console.error('Error fetching data:', error);
+        alert('Error fetching data. Please try again.');
+    }
+
+    // Function to display the last update time
+    function displayLastUpdateTime() {
+        const updateTimeDiv = document.getElementById('lastUpdateTime');
+        const currentTime = new Date().toLocaleTimeString();
+
+        updateTimeDiv.innerHTML = `<label>Last Update Time: ${currentTime}</label>`;
+    }
+
+    // Function to fetch cryptocurrency prices from the Coinbase API
+    async function fetchPrices() {
+        try {
+            const response = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=USDT');
+            const data = await response.json();
+
+            // Display prices and last update time
+            displayPricesChart(data.data.rates);
+            displayLastUpdateTime();
+        } catch (error) {
+            handleFetchError(error);
+        }
+    }
+
+    // Initial fetch and display
+    fetchPrices();
+    // Set interval to fetch and update prices every 30 seconds
+    setInterval(fetchPrices, 10000);
+
+    </script>
+
+</body>
+</html>

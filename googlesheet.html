@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <meta http-equiv=”refresh” content="1" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="bar1">
+        <a href="index.html" >HOME</a>
+        <a href="lab.html" id="lab">งาน lab</a>
+        <a href="api.html" id="api">api</a> 
+        <a href="Chart.html">Chart</a>
+        <a href="googlesheet.html">googlesheet</a>
+        <a href="#" id="titod">ติดต่อ</a>
+    </div>
+    <div class="googlesheet">
+        <h1>google docs</h1>
+        <h1>มันจะอัพเดทช้าหน่อย</h1>
+        <form name="contact">
+            <input class="wow" name="first_name" type="text" placeholder="Name" required>
+            <input class="wow" name="last_name" type="text" placeholder="lastname" required><br>
+            <input class="wow" name="email" type="text" placeholder="email" required>
+            <input class="wow" name="phone" type="text" placeholder="phone" required><br>
+            <button type="submit" class="btn2">Submit</button><br>
+            <a href="https://docs.google.com/spreadsheets/d/1Hva2TYVkdfv5Vx4PsYvkm0JnmsJvoMJRCVOCNqVuIS0/edit#gid=0">link google docs</a>
+        </form>
+        <br>
+
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQvUZfcI8oa4-uwSuOpoGwuDfUHbRQqEwXLk4xMLMCq1urWZTD73vvKE38WQA_SbWjgKIu47VgfjzIA/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="500px" height="300px"></iframe>
+
+        <script src="option.js"></script>
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbz_WOfPj06HJzzOUU1Ste4-jlO4Z5xIo6h0UdKMoTabSaIjaVMA_N3Xg9KuD0xdArnO/exec'
+            const form = document.forms['contact']
+            
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>Thank You for providing the details, We shall get back to you shortly !</b></div>",contact.reset())
+                .catch(error => console.error('Error!', error.message))
+            })
+        </script>
+    </div>
+</body>
+</html>
